@@ -1,5 +1,6 @@
 import { router } from '@kit.ArkUI';
 import { HttpUtil } from '../utils/HttpUtil';
+import { AudioUtil } from '../utils/AudioUtil';
 import { WordItem } from '../models/Models';
 
 interface StudyParams {
@@ -22,6 +23,7 @@ struct StudyPage {
   @State finished: boolean = false;
   @State correctCount: number = 0;
   @State totalCount: number = 0;
+  @State playingAudio: boolean = false;
 
   aboutToAppear(): void {
     const params = router.getParams() as StudyParams;
@@ -189,11 +191,23 @@ struct StudyPage {
           .fontColor('#333')
           .margin({ bottom: 8 })
 
-        // 音标
-        Text(this.words[this.currentIndex].phonetic)
-          .fontSize(18)
-          .fontColor('#999')
-          .margin({ bottom: 24 })
+        // 音标 + 发音按钮
+        Row() {
+          Text(this.words[this.currentIndex].phonetic)
+            .fontSize(18)
+            .fontColor('#999')
+
+          // 发音按钮
+          Text(this.playingAudio ? '🔊' : '🔈')
+            .fontSize(22)
+            .fontColor(this.playingAudio ? '#4A90D9' : '#999')
+            .margin({ left: 10 })
+            .onClick(() => {
+              this.handlePlayAudio();
+            })
+        }
+        .margin({ bottom: 24 })
+        .justifyContent(FlexAlign.Center)
 
         if (this.showAnswer) {
           // 分隔线
@@ -236,6 +250,21 @@ struct StudyPage {
       .borderRadius(20)
       .shadow({ radius: 12, color: '#1A000000', offsetY: 4 })
       .alignItems(HorizontalAlign.Center)
+    }
+  }
+
+  async handlePlayAudio(): Promise<void> {
+    if (this.playingAudio || this.currentIndex >= this.words.length) {
+      return;
+    }
+    this.playingAudio = true;
+    try {
+      const word = this.words[this.currentIndex].word;
+      await AudioUtil.playWord(word);
+    } catch (err) {
+      console.error('playAudio error', JSON.stringify(err));
+    } finally {
+      this.playingAudio = false;
     }
   }
 

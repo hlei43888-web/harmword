@@ -42,6 +42,9 @@ export struct MinePage {
 
       // 菜单列表
       Column() {
+        this.MenuItemClickable('词书选择', '切换词库', () => {
+          router.pushUrl({ url: 'pages/BookSelectPage' });
+        })
         this.MenuItem('每日目标', '20个单词')
         this.MenuItem('学习提醒', '每天 08:00')
         this.MenuItem('关于应用', 'v1.0.0')
@@ -91,6 +94,25 @@ export struct MinePage {
     }
     .width('100%')
     .padding({ left: 16, right: 16, top: 14, bottom: 14 })
+  }
+
+  @Builder
+  MenuItemClickable(title: string, detail: string, onClick: () => void) {
+    Row() {
+      Text(title)
+        .fontSize(15)
+        .fontColor('#333')
+      Blank()
+      Text(detail)
+        .fontSize(14)
+        .fontColor('#999')
+      Text(' >')
+        .fontSize(14)
+        .fontColor('#CCC')
+    }
+    .width('100%')
+    .padding({ left: 16, right: 16, top: 14, bottom: 14 })
+    .onClick(onClick)
   }
 
   async loadUserInfo(): Promise<void> {

@@ -11,8 +11,8 @@ export class HttpUtil {
     return HttpUtil.request(url, http.RequestMethod.POST, data as Record<string, Object>);
   }
 
-  static async put(url: string, data?: Record<string, Object>): Promise<Record<string, Object>> {
-    return HttpUtil.request(url, http.RequestMethod.PUT, data);
+  static async put(url: string, data?: Object): Promise<Record<string, Object>> {
+    return HttpUtil.request(url, http.RequestMethod.PUT, data as Record<string, Object>);
   }
 
   private static async request(

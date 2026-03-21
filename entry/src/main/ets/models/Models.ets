@@ -30,6 +30,15 @@ export interface StatsOverview {
   accuracy_percent: number;
 }
 
+// 词书模型
+export interface WordBook {
+  id: number;
+  name: string;
+  level: string;
+  word_count: number;
+  created_at: string;
+}
+
 // 登录/注册响应
 export interface AuthResponse {
   message: string;
@@ -40,4 +49,5 @@ export interface AuthResponse {
 export interface UserInfo {
   id: number;
   username: string;
+  active_book_id?: number;
 }
