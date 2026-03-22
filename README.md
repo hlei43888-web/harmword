@@ -60,3 +60,40 @@ App 启动 → Index (检查登录)
 - 独立路由页面用 `@Entry` + `@Component`
 - HttpUtil.request 的 method 必须用 `http.RequestMethod` 枚举
 - ArkTS linter 要求接口传参时可能需用 `class` 替代 `interface`
+- 
+效果展示：
+注册：
+![img.png](img.png)
+首页：
+![img_1.png](img_1.png)
+选择学习模式：
+![img_2.png](img_2.png)
+卡片模式：
+![img_3.png](img_3.png)、
+收藏：
+![img_4.png](img_4.png)
+显示答案：
+![img_5.png](img_5.png)
+切换到听写模式：
+![img_6.png](img_6.png)
+提交答案：
+![img_7.png](img_7.png)
+切换拼写模式：
+![img_8.png](img_8.png)
+提交答案：
+![img_9.png](img_9.png)
+错词本页面收藏夹：
+![img_10.png](img_10.png)
+错词本：
+![img_11.png](img_11.png)
+统计页面：
+![img_12.png](img_12.png)
+学习日历：
+![img_13.png](img_13.png)
+个人主页：
+![img_14.png](img_14.png)
+单词搜索：
+![img_15.png](img_15.png)
+![img_16.png](img_16.png)
+词书选择：
+![img_17.png](img_17.png)
