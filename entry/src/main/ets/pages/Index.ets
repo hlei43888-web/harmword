@@ -25,6 +25,24 @@ struct Index {
 
   build() {
     if (this.isReady) {
+      Column() {
+        // 顶部 AppBar
+        Row() {
+          Text('HarmWord')
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#333')
+          Blank()
+          Text('🔍')
+            .fontSize(22)
+            .padding(8)
+            .onClick(() => {
+              router.pushUrl({ url: 'pages/SearchPage' });
+            })
+        }
+        .width('100%')
+        .padding({ left: 16, right: 16, top: 10, bottom: 6 })
+
       Tabs({ barPosition: BarPosition.End, index: this.currentTab }) {
         TabContent() {
           HomePage()
@@ -50,6 +68,10 @@ struct Index {
       .onChange((index: number) => {
         this.currentTab = index;
       })
+      .layoutWeight(1)
+      }
+      .width('100%')
+      .height('100%')
     } else {
       Column() {
         LoadingProgress()

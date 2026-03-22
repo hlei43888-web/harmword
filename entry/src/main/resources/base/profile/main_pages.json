@@ -4,6 +4,7 @@
     "pages/LoginPage",
     "pages/StudyPage",
     "pages/BookSelectPage",
-    "pages/CalendarPage"
+    "pages/CalendarPage",
+    "pages/SearchPage"
   ]
 }

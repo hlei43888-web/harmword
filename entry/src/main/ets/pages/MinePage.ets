@@ -42,6 +42,9 @@ export struct MinePage {
 
       // 菜单列表
       Column() {
+        this.MenuItemClickable('单词搜索', '搜索单词', () => {
+          router.pushUrl({ url: 'pages/SearchPage' });
+        })
         this.MenuItemClickable('词书选择', '切换词库', () => {
           router.pushUrl({ url: 'pages/BookSelectPage' });
         })

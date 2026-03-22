@@ -56,3 +56,15 @@ export interface UserInfo {
 export interface FavoriteWordItem extends WordItem {
   favorited_at: string;
 }
+
+// 搜索结果条目
+export interface SearchWordItem {
+  id: number;
+  word: string;
+  phonetic: string;
+  meaning: string;
+  example: string;
+  difficulty: number;
+  mastery_level: number | null;
+  is_favorite: number;
+}
