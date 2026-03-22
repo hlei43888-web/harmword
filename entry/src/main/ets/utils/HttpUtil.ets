@@ -15,7 +15,11 @@ export class HttpUtil {
     return HttpUtil.request(url, http.RequestMethod.PUT, data as Record<string, Object>);
   }
 
-  private static async request(
+  static async delete(url: string): Promise<Record<string, Object>> {
+    return HttpUtil.request(url, http.RequestMethod.DELETE);
+  }
+
+  static async request(
     url: string,
     method: http.RequestMethod,
     data?: Record<string, Object>

@@ -2,6 +2,7 @@ import { router } from '@kit.ArkUI';
 import { StorageUtil } from '../utils/StorageUtil';
 import { HomePage } from './HomePage';
 import { StatsPage } from './StatsPage';
+import { FavoritesPage } from './FavoritesPage';
 import { MinePage } from './MinePage';
 
 @Entry
@@ -31,14 +32,19 @@ struct Index {
         .tabBar(this.TabBarItem(0, '首页', '🏠'))
 
         TabContent() {
+          FavoritesPage()
+        }
+        .tabBar(this.TabBarItem(1, '错词本', '📝'))
+
+        TabContent() {
           StatsPage()
         }
-        .tabBar(this.TabBarItem(1, '统计', '📊'))
+        .tabBar(this.TabBarItem(2, '统计', '📊'))
 
         TabContent() {
           MinePage()
         }
-        .tabBar(this.TabBarItem(2, '我的', '👤'))
+        .tabBar(this.TabBarItem(3, '我的', '👤'))
       }
       .barMode(BarMode.Fixed)
       .onChange((index: number) => {

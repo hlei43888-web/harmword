@@ -10,6 +10,8 @@ export struct HomePage {
   @State totalToday: number = 0;
   @State loading: boolean = true;
   @State dateStr: string = '';
+  @State showModeDialog: boolean = false;
+  @State selectedMode: string = '';
 
   aboutToAppear(): void {
     this.loadTodayWords();
@@ -75,11 +77,7 @@ export struct HomePage {
                 .borderRadius(14)
                 .margin({ bottom: 24 })
                 .onClick(() => {
-                  const allWords: WordItem[] = [...this.reviewWords, ...this.newWords];
-                  router.pushUrl({
-                    url: 'pages/StudyPage',
-                    params: { words: JSON.stringify(allWords) }
-                  });
+                  this.showModeSheet();
                 })
             } else {
               Column() {
@@ -127,6 +125,45 @@ export struct HomePage {
         }
         .layoutWeight(1)
       }
+
+      // 学习模式选择弹窗
+      if (this.showModeDialog) {
+        Column() {
+          Column() {
+            Text('选择学习模式')
+              .fontSize(18)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#333')
+              .margin({ bottom: 20 })
+            this.ModeOption('卡片模式', '📖', 'card')
+            this.ModeOption('听写模式', '🔊', 'dictation')
+            this.ModeOption('拼写模式', '✏️', 'spell')
+
+            Button('取消')
+              .width('100%')
+              .height(44)
+              .fontSize(16)
+              .fontColor('#666')
+              .backgroundColor('#F5F5F5')
+              .margin({ top: 12 })
+              .onClick(() => {
+                this.showModeDialog = false;
+              })
+          }
+          .width('80%')
+          .padding(20)
+          .backgroundColor(Color.White)
+          .borderRadius(16)
+          .shadow({ radius: 8, color: '#1A000000', offsetY: 2 })
+        }
+        .width('100%')
+        .height('100%')
+        .backgroundColor('#80000000')
+        .justifyContent(FlexAlign.Center)
+        .onClick(() => {
+          this.showModeDialog = false;
+        })
+      }
     }
     .width('100%')
     .height('100%')
@@ -169,14 +206,24 @@ export struct HomePage {
           .fontColor(Color.White)
           .backgroundColor('#4A90D9')
           .borderRadius(8)
-          .padding({ left: 8, right: 8, top: 3, bottom: 3 })
+          .padding({
+            left: 8,
+            right: 8,
+            top: 3,
+            bottom: 3
+          })
       } else {
         Text('NEW')
           .fontSize(12)
           .fontColor(Color.White)
           .backgroundColor('#E67E22')
           .borderRadius(8)
-          .padding({ left: 8, right: 8, top: 3, bottom: 3 })
+          .padding({
+            left: 8,
+            right: 8,
+            top: 3,
+            bottom: 3
+          })
       }
     }
     .width('90%')
@@ -184,6 +231,41 @@ export struct HomePage {
     .backgroundColor(Color.White)
     .borderRadius(12)
     .margin({ bottom: 8 })
+  }
+
+  @Builder
+  ModeOption(title: string, icon: string, mode: string) {
+    Row() {
+      Text(icon)
+        .fontSize(18)
+        .margin({ right: 12 })
+      Text(title)
+        .fontSize(16)
+        .fontWeight(FontWeight.Medium)
+        .fontColor('#333')
+    }
+    .width('100%')
+    .height(48)
+    .justifyContent(FlexAlign.Start)
+    .padding({ left: 20 })
+    .backgroundColor(Color.White)
+    .onClick(() => {
+      this.selectMode(mode);
+    })
+  }
+
+  showModeSheet(): void {
+    this.showModeDialog = true;
+  }
+
+  selectMode(mode: string): void {
+    this.showModeDialog = false;
+    const allWords: WordItem[] = [...this.reviewWords, ...this.newWords];
+    const wordsJson = JSON.stringify(allWords);
+    router.pushUrl({
+      url: 'pages/StudyPage',
+      params: { words: wordsJson, mode: mode }
+    });
   }
 
   async loadTodayWords(): Promise<void> {

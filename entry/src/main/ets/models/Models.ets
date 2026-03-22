@@ -51,3 +51,8 @@ export interface UserInfo {
   username: string;
   active_book_id?: number;
 }
+
+// 收藏/错词条目
+export interface FavoriteWordItem extends WordItem {
+  favorited_at: string;
+}

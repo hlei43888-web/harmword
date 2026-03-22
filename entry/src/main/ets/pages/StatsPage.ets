@@ -1,3 +1,4 @@
+import { router } from '@kit.ArkUI';
 import { HttpUtil } from '../utils/HttpUtil';
 
 @Component
@@ -112,7 +113,37 @@ export struct StatsPage {
             .backgroundColor(Color.White)
             .borderRadius(16)
             .shadow({ radius: 8, color: '#1A000000', offsetY: 2 })
+            .margin({ bottom: 16 })
+
+            // 学习日历入口
+            Row() {
+              Column() {
+                Text('📅')
+                  .fontSize(28)
+                Text('学习日历')
+                  .fontSize(14)
+                  .fontColor('#333')
+                  .margin({ top: 4 })
+                Text('查看打卡热力图')
+                  .fontSize(12)
+                  .fontColor('#999')
+                  .margin({ top: 2 })
+              }
+              .layoutWeight(1)
+
+              Text('>')
+                .fontSize(20)
+                .fontColor('#CCC')
+            }
+            .width('90%')
+            .padding(20)
+            .backgroundColor(Color.White)
+            .borderRadius(16)
+            .shadow({ radius: 8, color: '#1A000000', offsetY: 2 })
             .margin({ bottom: 20 })
+            .onClick(() => {
+              router.pushUrl({ url: 'pages/CalendarPage' });
+            })
           }
           .width('100%')
           .padding({ bottom: 20 })
