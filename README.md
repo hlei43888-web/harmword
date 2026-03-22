@@ -15,22 +15,23 @@ entry/src/main/ets/
 ├── entryability/
 │   └── EntryAbility.ets       # Ability 入口，初始化 StorageUtil
 ├── models/
-│   └── Models.ets             # 数据类型定义 (WordItem, WordBook 等)
+│   └── Models.ets             # 数据类型定义 (WordItem, WordBook, SearchWordItem 等)
 ├── utils/
 │   ├── Constants.ets          # BASE_URL = http://10.0.2.2:3000
 │   ├── HttpUtil.ets           # 网络请求 (GET/POST/PUT/DELETE + JWT)
 │   ├── StorageUtil.ets        # Preferences 本地存储
 │   └── AudioUtil.ets          # AVPlayer 单词发音
 └── pages/
-    ├── Index.ets              # TabBar 容器 (首页/错词本/统计/我的)
+    ├── Index.ets              # TabBar 容器 (首页/错词本/统计/我的) + 顶部搜索入口
     ├── LoginPage.ets          # 登录 + 注册
-    ├── HomePage.ets           # 今日任务 + 开始学习
-    ├── StudyPage.ets          # 单词卡片 (发音/收藏/忘记/模糊/记住)
+    ├── HomePage.ets           # 今日任务 + ActionSheet 选择学习模式
+    ├── StudyPage.ets          # 学习页 (卡片/听写/拼写 三种模式)
+    ├── SearchPage.ets         # 全局单词搜索 (Search 组件+详情 Panel+收藏)
     ├── FavoritesPage.ets      # 收藏夹 + 错词本 (Tab 切换)
     ├── StatsPage.ets          # 学习统计
     ├── CalendarPage.ets       # 打卡热力图日历
     ├── BookSelectPage.ets     # 词书选择
-    └── MinePage.ets           # 个人中心 + 退出登录
+    └── MinePage.ets           # 个人中心 + 单词搜索入口 + 退出登录
 ```
 
 ## 页面导航
@@ -39,10 +40,12 @@ entry/src/main/ets/
 App 启动 → Index (检查登录)
   ├── 未登录 → LoginPage → 登录成功 → Index
   └── 已登录 → TabBar
-       ├── 首页 (HomePage) → 开始学习 → StudyPage → 返回
+       ├── 顶部 AppBar 🔍 → SearchPage
+       ├── 首页 (HomePage) → 开始学习 → 选择模式 (卡片/听写/拼写) → StudyPage → 返回
        ├── 错词本 (FavoritesPage) → 学习错词 → StudyPage
        ├── 统计 (StatsPage) → 学习日历 → CalendarPage
-       └── 我的 (MinePage) → 词书选择 → BookSelectPage
+       └── 我的 (MinePage) → 单词搜索 → SearchPage
+                           → 词书选择 → BookSelectPage
 ```
 
 ## 网络配置
